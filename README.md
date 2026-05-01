@@ -20,8 +20,8 @@ A full-stack web application designed to help teams collaborate effectively. Thi
 
 ## Live Demo
 
-- **Frontend URL:** [https://team-task-manager-mu-sandy.vercel.app](https://team-task-manager-mu-sandy.vercel.app)
--
+- **URL:** [https://team-task-manager-mu-sandy.vercel.app](https://team-task-manager-mu-sandy.vercel.app)
+
 
 ## 💻 Running Locally
 
