@@ -171,16 +171,22 @@ const Tasks = () => {
                   </div>
                   
                   <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                    <select 
-                      className="form-input" 
-                      style={{ padding: '0.25rem 0.5rem', width: 'auto' }}
-                      value={task.status}
-                      onChange={(e) => handleStatusChange(task._id, e.target.value)}
-                    >
-                      <option value="To Do">To Do</option>
-                      <option value="In Progress">In Progress</option>
-                      <option value="Done">Done</option>
-                    </select>
+                    {(user?.role === 'Admin' || task.assignedTo?._id === user?._id) ? (
+                      <select 
+                        className="form-input" 
+                        style={{ padding: '0.25rem 0.5rem', width: 'auto' }}
+                        value={task.status}
+                        onChange={(e) => handleStatusChange(task._id, e.target.value)}
+                      >
+                        <option value="To Do">To Do</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Done">Done</option>
+                      </select>
+                    ) : (
+                      <span className={`badge ${task.status === 'Done' ? 'badge-done' : task.status === 'In Progress' ? 'badge-progress' : 'badge-todo'}`}>
+                        {task.status}
+                      </span>
+                    )}
                     
                     {user?.role === 'Admin' && (
                       <button onClick={() => handleDelete(task._id)} style={{ background: 'none', border: 'none', color: 'var(--danger)', cursor: 'pointer' }}>

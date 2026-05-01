@@ -33,11 +33,18 @@ export const updateTask = async (req, res) => {
     const task = await Task.findById(req.params.id);
     if (!task) return res.status(404).json({ message: 'Task not found' });
 
-    task.title = req.body.title || task.title;
-    task.description = req.body.description || task.description;
-    task.status = req.body.status || task.status;
-    if (req.body.assignedTo) task.assignedTo = req.body.assignedTo;
-    if (req.body.dueDate) task.dueDate = req.body.dueDate;
+    if (req.user.role !== 'Admin') {
+      if (task.assignedTo?.toString() !== req.user._id.toString()) {
+        return res.status(403).json({ message: 'Not authorized to update this task' });
+      }
+      task.status = req.body.status || task.status;
+    } else {
+      task.title = req.body.title || task.title;
+      task.description = req.body.description || task.description;
+      task.status = req.body.status || task.status;
+      if (req.body.assignedTo !== undefined) task.assignedTo = req.body.assignedTo;
+      if (req.body.dueDate) task.dueDate = req.body.dueDate;
+    }
 
     const updatedTask = await task.save();
     res.json(updatedTask);
