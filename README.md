@@ -18,10 +18,6 @@ A full-stack web application designed to help teams collaborate effectively. Thi
 - **Database:** MongoDB & Mongoose
 - **Authentication:** JSON Web Tokens (JWT) & bcryptjs for secure password hashing
 
-## Live Demo
-
-- **URL:** [https://team-task-manager-mu-sandy.vercel.app](https://team-task-manager-mu-sandy.vercel.app)
-
 
 ## 💻 Running Locally
 
